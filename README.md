@@ -1,114 +1,134 @@
 
-# Skewness and Kurtosis
+# The Standard Normal Distribution
 
 ## Introduction
-We have previously identified a normal distribution to be symmetrical in shape. But this may not be the case most of the time when dealing real world data. This lesson will cover the attributes of a normal distribution that define how much "out-of-shape" it is. 
+In this lesson, we will introduce a special case of normal distributions: "The Standard Normal Distribution".
 
 ## Objectives
+
 You will be able to:
 
-* Understand the concept of symmetrical distribution
-* Calculate and describe skewness and kurtosis as measures of non-symmetry
+* Compare and contrast the normal and the standard normal distribution
+* Calculate the z-score (standard score) for an observation from normally distributed data
+* Understand the process for standardizing data by converting it to the standard normal distribution
 
-## Symmetric Distributions
+## What is a Standard Normal Distribution?
 
-A distribution is symmetric if the relative frequency or probability is the same at equal distances from the point of symmetry . The point of symmetry for normal distributions would be the center of that distribution i.e. the mean. We can refer to the point of symmetry as **𝛼**. 
+Previously, you learned about the normal (or Gaussian) distribution, which is characterized by a bell shape curve. We also identified the mean and standard deviation as the defining parameters of this distribution. As mentioned before, normal distributions do not necessarily have the same means and standard deviations. 
 
-The mean and median are equal and occur at 𝛼 where 𝛼 represents the point that the distribution is symmetric about its mean. Also the mode is equal to the mean and median if the distribution is both symmetric and unimodal (unimodal means that the distribution only has one value that occurs the most, one peak).
+The standard normal distribution, however, is a **special case** of the normal distribution. The Standard Normal Distribution is a normal distribution with a mean of 0, and a standard deviation of 1. 
 
-For example have a look at following histogram we saw when discussing measures of central tendency:
+<img src = "images/snorm.png" width = "650">
 
-![](sym.gif)
+Plotting a continuous cumulative distribution function for the standard normal distribution, the CDF would look like this:
+<img src = "images/cdf_stnormal.png" width ="450">
 
-This distribution meets all of the conditions of being symmetrical. 
+Thinking back to the standard deviation rule for normal distributions:
 
-The most common symmetric distribution is the normal distribution, however there are a number of other distributions that are symmetric. [Here is a good article](chttps://www.statisticshowto.datasciencecentral.com/symmetric-distribution-2/) that looks into all sorts of symmetrical distributions. We shall focus on normal distributions here and see how these can lose symmetry.
-
-## Skewness
-
-Skewness is the degree of distortion or deviation from the symmetrical bell curve that is a key characteristic of a normal distribution. Skewness can be seen as a measure to calculate lack of symmetry in data distribution.
-
-Skewness helps you identify extreme values in one versus the other tail. A symmetrical distribution will have a skewness of 0. There are two types of Skewness: Positive and Negative
-
-### Positive Skewness
-
-Positive Skewness is present in a distribution when the tail on the right side of the distribution is longer (or fatter - as it is normally called). The mean and median will be greater than the mode.
-
-### Negative Skewness
-Negative Skewness is present in a distribution when the tail of the left side of the distribution is longer or fatter than the tail on the right side. The mean and median will be less than the mode.
-
-This behavior is shown in the images below:
-
-![](skew1.jpeg)
-
-Here the fact that mean is not the same as median and mode anymore brings in consequences for data analysis. The normality assumption that we associate with a given data data for analysis does not hold true when these situations happen. Later we shall see how to deal with such distributions. 
-
-### Measuring Skewness
-
-For univariate data Y1, Y2, ..., YN, the formula for skewness is:
-
-**Skewness= ∑ N<sub>i=1</sub> (Yi−Y)<sup>3</sup> / N)/s<sup>3</sup>**
-
-where Y¯ is the mean, s is the standard deviation, and N is the number of data points. Note that in computing the skewness. The above formula for skewness is referred to as the **Fisher-Pearson coefficient of skewness**. There are also other ways to calculate skewness but this one is used mostly commonly. 
-
-### When is the skewness too much?
-
-The rule of thumb seems to be:
-
-* If the skewness is between -0.5 and 0.5, the data are fairly symmetrical.
-* If the skewness is between -1 and -0.5(negatively skewed) or between 0.5 and 1(positively skewed), the data are moderately skewed.
-* If the skewness is less than -1(negatively skewed) or greater than 1(positively skewed), the data are highly skewed.
-
-**Example**
-
-Suppose we have house values ranging from $100k to $1,000,000 with the average being $500,000 in a given house prices dataset. 
+* $68\%$ of the area lies in the interval of 1 standard deviation from the mean, or mathematically speaking, $68\%$ is in the interval  $[\mu-\sigma, \mu+\sigma]$
+*  $95\%$ of the area lies in the interval of 2 standard deviations from the mean, or mathematically speaking, $95\%$ is in the interval  $[(\mu-2\sigma), (\mu+2\sigma)]$
+* $99\%$ of the area lies in the interval of 3 standard deviations from the mean, or mathematically speaking, $99\%$ is in the interval  $[(\mu-3\sigma), (\mu+3\sigma)]$
 
 
+With a $\mu = 0$ and $\sigma=1$, this means that for the standard normal distribution:
 
-If the peak of the distribution was left of the average value, portraying a positive skewness in the distribution. It would mean that many houses were being sold for less than the average value, i.e. $500k. This could be for many reasons, but we are not going to interpret those reasons here.
+* $68\%$ of the area lies between -1 and 1.
+* $95\%$ of the area lies between -2 and 2.
+* $99\%$ of the area lies between -3 and 3.
 
-If the peak of the distributed data was right of the average value, that would mean a negative skew. This would mean that the houses were being sold for more than the average value as shown below.
-<img src = "homeskew.png" width = 400>
+This simplicity makes a standard normal distribution very desirable to work with. The exciting news is that you can very easily **transform** any normal distribution to a standard normal distribution!
 
-## Kurtosis
+## Standard Score (z-score)
 
-Kurtosis deals with the lengths of tails in the distribution. There is general misconception that kurtosis is a measure of "peakedness" in a distributions. Well kurtosis is not really the peakedness or flatness. It is used to describe the extreme values in one versus the other tail. It is actually the **measure of outliers** present in the distribution.
-![](kurt1.png)
+The standard score (more commonly referred to as a z-score) is a very useful statistic because it allows us to:
+1. Calculate the probability of a certain score occurring within a given normal distribution and 
+2. Compare two scores that are from different normal distributions.
 
-Here we see that long tails are generally due to errors in the measurement as the peaks of the data (correct values) are all centred around the mean of the distribution. Long tails here are the signs that apart of correct measurements, we also have data about outliers present in our dataset. 
+Any normal distribution can be converted to a standard normal distribution and vice versa using this
+equation:
 
-### Measuring Kurtosis
+$$\Large z=\dfrac{x-\mu}{\sigma}$$
 
-For univariate data Y1, Y2, ..., YN, the formula for kurtosis is:
-
-**kurtosis =∑ N<sub>(i=1)</sub> (Yi−Y¯)<sup>4</sup> / N / s<sup>4</sup>**
-
-If there is a high kurtosis, then, we need to investigate why do we have so many outliers. 
-Presence of outliers could be indications of errors OR some interesting observations that may need to be explored further. Remember for banking transactions, an outliers might signify a possible fraudulent activity. How we deal with outliers depends mainly on the domain. 
-So always Investigate!
-
-Low kurtosis in a data set is an indicator that data has light tails or lack of outliers. If we get low kurtosis(too good to be true), then also we need to investigate and trim the dataset of unwanted results.
-
-### How much kurtosis is bad kurtosis ?
-
-![](kurt2.jpg)
-
-#### Mesokurtic 
-
-This distribution has kurtosis statistic similar to that of the normal distribution. It means that the extreme values of the distribution are similar to that of a normal distribution characteristic. This definition is used so that the standard normal distribution has a kurtosis of three.
-
-#### Leptokurtic (Kurtosis > 3)
-
-Distribution is longer, tails are fatter. Peak is higher and sharper than Mesokurtic, which means that data are heavy-tailed or profusion of outliers. 
-Outliers stretch the horizontal axis of the histogram graph, which makes the bulk of the data appear in a narrow (“skinny”) vertical range, thereby giving the “skinniness” of a leptokurtic distribution.
-
-#### Platykurtic: (Kurtosis < 3) 
-
-Distribution is shorter, tails are thinner than the normal distribution. The peak is lower and broader than Mesokurtic, which means that data are light-tailed or lack of outliers.
-The reason for this is because the extreme values are less than that of the normal distribution.
+Here, $x$ is an observation from the original normal distribution, $\mu$ is the mean and $\sigma$ is the standard deviation of the original normal distribution. 
 
 
+The standard normal distribution is sometimes called the $z$ distribution. A $z$ score always reflects the number of standard deviations above or below the mean. 
 
-## Summary 
+### An example 
 
-In this lesson, we learned about the characteristics of distributions( specifically normal distribution) that identify the level of non-symmetry and presence of consistent outliers in the data. Next we shall see how to measure skewness and kurtosis in python. 
+Imagine test results following a normal distribution with a mean of 50 and a standard deviation of 10.
+One of the students scored a 70 on the test. Using this information into z-scores makes it easy to tell how she performed in terms of standard deviations from the mean:
+
+
+Imagine a person scored a 70 on a test, with results distribution having a mean of 50 and a standard deviation of 10, then they scored 2 standard deviations above the mean. Converting the test scores to z scores, an X of 70 would be:
+
+$z = \dfrac{70 - 50}{10}  = 2$
+
+By having transformed our test result of 70 to the z-score of 2, we now know that the student's original score was 2 standard deviations above the mean. Note that the $z$ distribution will only be a normal distribution if the original distribution of x was normal.
+In summary, calculating the z-score gives us quick and easy access to understanding how **extreme** a certain result is. Looking at the original distribution ($\mu =50$, $\sigma=10$) and the standard normal distribution ($\mu =0$, $\sigma=1$) while highlighting $x=70$ and $z=2$ gives the following result: 
+
+
+<img src = "images/test_std_normal.png" width ="950">
+
+Visually, the idea is that the area under the curve left and right from the vertical red line are identical in the left plot and the right plot!
+
+Thinking on these lines, you can also convert a $z$-score back to an original score $X$ by using the same formula as:
+
+$$\large X=\mu + z\sigma$$
+
+
+For above exmaple, this would work out as:
+
+$X = 50 + 2*10 = 70 $
+
+## Data Standardization
+
+Data standardization is common data preprocessing skill, which is used to compare a number of observations belonging to different normal distributions, and having distinct means and standard deviations. 
+
+Standardization applying a $z$ score calculation as shown above, on each element of the distribution. The output of this process is a **z-distribution** or a **standard normal distribution**. 
+<img src="images/flow.png" width=600>
+
+Let's look at a quick example. First, we'll randomly generate two normal distributions with different means and standard deviations. Let's generate 1000 observations for each. Next, we'll use Seaborn to plot the results.
+
+
+```python
+import numpy as np
+import seaborn as sns
+mean1, sd1 = 5, 3 # dist 1 
+mean2, sd2 = 10, 2 # dist 2 
+d1 = np.random.normal(mean1, sd1, 1000)
+d2 = np.random.normal(mean2, sd2, 1000)
+sns.distplot(d1);
+sns.distplot(d2);
+```
+
+
+![png](index_files/index_1_0.png)
+
+
+You can see that these distributions differ from each other and are not directly comparable.
+
+For a number of machine learning algorithms and data visualization techniques, it is important that the effect of scale of data is removed before you start thinking about building your model. Standardization allows for this by converting the distributions into a z-distribution,bringing them to a common scale (with $\mu = 0$, $\sigma = 1$. Let's standardize above distributions and look at the effect. 
+
+
+```python
+# Stardardizing and visualizing distributions
+
+sns.distplot([(x - d1.mean())/d1.std() for x in d1]);
+sns.distplot([(x - d2.mean())/d2.std() for x in d2]);
+```
+
+
+![png](index_files/index_3_0.png)
+
+
+You see that both distributions are directly comparable on a common standard scale. As mentioned earlier, this trick will come in handy with analytics experiments while training machine learning algorithms. 
+
+## Level up (Optional) 
+
+Convert standard distributions back to the original normal distributions using the formula given above. Visualize them to see your original distributions. 
+
+## Summary
+
+In this lesson you learned about a special case of the normal distribution called the standard normal distribution.
+You also learned how to convert any normal distribution to a standard normal distribution using the z-score. You'll continue working on this in the following labs. 
